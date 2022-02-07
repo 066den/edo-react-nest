@@ -1,0 +1,12 @@
+.modal {
+  //background-color: rgba(#22292f, 0.5);
+  pointer-events: none;
+  display: block !important;
+}
+
+.modal-backdrop {
+  pointer-events: none;
+  &.show {
+    pointer-events: all;
+  }
+}

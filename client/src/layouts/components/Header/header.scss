@@ -1,0 +1,73 @@
+@import "./../../../config.scss";
+
+.header-navbar {
+  position: fixed;
+  padding: 0;
+  right: 0;
+  left: 260px;
+  background: #fff;
+  margin: 0.5rem auto 0;
+  width: calc(100vw - (100vw - 100%) - calc(2rem * 2) - 260px);
+  border-radius: 0.428rem;
+  z-index: 12;
+  box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+  .navbar-container {
+    flex-basis: 100%;
+    padding: 0.8rem 1rem;
+    transition: 0.3s ease all;
+    margin-left: 0;
+    ul {
+      &.navbar-nav {
+        li {
+          & > a.nav-link {
+            color: $text;
+            padding: 0 0.5rem;
+            position: relative;
+          }
+          &.dropdown {
+            .dropdown-menu {
+              top: 41px;
+              right: 0;
+            }
+          }
+          &.dropdown-user {
+            line-height: 1;
+            .dropdown-menu {
+              width: 12rem;
+              margin-top: 10px;
+            }
+            a {
+              display: flex;
+              align-items: center;
+              .user-nav {
+                flex-direction: column;
+                align-items: flex-end;
+                margin-right: 0.8rem;
+              }
+              .user-name {
+                display: inline-block;
+                margin-bottom: 0.435rem;
+                margin-left: 0.2rem;
+              }
+              img {
+                box-shadow: 0 4px 8px 0 rgb(34 41 47 / 12%),
+                  0 2px 4px 0 rgb(34 41 47 / 8%);
+              }
+              &.dropdown-toggle::after {
+                display: none;
+              }
+            }
+            svg {
+              height: 16px;
+              width: 16px;
+            }
+          }
+          svg {
+            height: 1.5rem;
+            width: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}

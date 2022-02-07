@@ -1,0 +1,24 @@
+$accent: #5c8252;
+$accent2: #fed035;
+$accent3: #e4352c;
+$accent-bg: #f8f8f8;
+$text: #6e6b7b;
+$link: #625f6e;
+$text-h: #5e5873;
+$accent-line: rgba(0, 0, 0, 0.08);
+$spacing: 0.19em;
+$text2: #191919;
+$light: #f6f6f6;
+$fontsize: 14px; // Body Font Size;
+$system: "Montserrat", Helvetica, Arial, serif; // System Font Family
+
+//$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1600px)
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1600px,
+);
+
+$modal-xl: 1600px;
