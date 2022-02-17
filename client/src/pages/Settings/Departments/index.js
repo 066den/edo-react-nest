@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CreateDepartment from "../../../lib/modal/CreateDepartment";
+import CreateDepartment from "../../../components/modal/CreateDepartment";
 import DepList from "./DepList";
 
 const Departments = () => {

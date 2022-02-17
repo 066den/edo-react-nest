@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getUsers } from "../../../actions/user";
-import CreateUser from "../../../lib/modal/CreateUser";
-import IconSvg from "../../../lib/Svg/IconSvg";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../../../redux/actions/user";
+import CreateUser from "../../../components/modal/CreateUser";
+import IconSvg from "../../../components/Svg/IconSvg";
 import UserList from "./UserList";
+import useRequest from "../../../hooks/useRequest";
+import { setUsers } from "../../../redux/reducers/userReducer";
 
 const Users = () => {
   const dispatch = useDispatch();
-
+  const [users, loading] = useRequest(getUsers);
   const [createUserShow, setCreateUserShow] = useState(false);
+  const usersList = useSelector((state) => state.user.users);
 
   useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
+    dispatch(setUsers(users));
+  }, [users]);
 
   return (
     <div className="card">
@@ -37,7 +41,7 @@ const Users = () => {
         </div>
       </div>
       <div className="card-datatable table-responsive pt-0">
-        <UserList />
+        <UserList usersList={usersList} loading={loading} />
       </div>
       <CreateUser
         show={createUserShow}

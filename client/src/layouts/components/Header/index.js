@@ -1,7 +1,7 @@
 import { NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import IconSvg from "../../../lib/Svg/IconSvg";
-import { logout } from "../../../reducers/userReducer";
+import IconSvg from "../../../components/Svg/IconSvg";
+import { logout } from "../../../redux/reducers/userReducer";
 import castomAvatar from "./../../../assets/ava.png";
 
 import "./header.scss";
@@ -61,7 +61,7 @@ const Header = () => {
                     className="round"
                     src={
                       (avatar &&
-                        `${process.env.REACT_APP_API_URL}/image/${avatar}`) ||
+                        `${process.env.REACT_APP_API_URL}/avatar/${avatar}`) ||
                       castomAvatar
                     }
                     alt="avatar"

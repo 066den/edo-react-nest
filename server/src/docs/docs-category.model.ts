@@ -11,6 +11,4 @@ export class Category extends Model<Category> {
   @Column({type: DataType.STRING})
   description: string;
 
-  
-
 }

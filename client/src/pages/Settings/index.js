@@ -1,9 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink, Outlet } from "react-router-dom";
-import { getSettings } from "../../actions/user";
+import { getSettings } from "../../redux/actions/user";
 import Heading from "../../layouts/components/Heading";
-import IconSvg from "../../lib/Svg/IconSvg";
+import IconSvg from "../../components/Svg/IconSvg";
+import { Nav, Tab } from "react-bootstrap";
+import Users from "./Users";
+import Departments from "./Departments";
+import General from "./General";
+import Roles from "./Roles";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -16,34 +20,48 @@ const Settings = () => {
     <>
       <Heading title="Налаштування" />
       <div className="content-body">
-        <ul className="nav nav-pills mb-4">
-          <li className="nav-item">
-            <NavLink to="/settings/users" className="nav-link">
-              <IconSvg id="user" />
-              <span className="fw-bold">Користувачі</span>
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/settings/departments" className="nav-link">
-              <IconSvg id="feather-box" />
-              <span className="fw-bold">Відділи</span>
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/settings/roles" className="nav-link">
-              <IconSvg id="feather-box" />
-              <span className="fw-bold">Ролі</span>
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/settings/general" className="nav-link">
-              <IconSvg id="feather-box" />
-              <span className="fw-bold">Інщі</span>
-            </NavLink>
-          </li>
-        </ul>
-
-        <Outlet />
+        <Tab.Container defaultActiveKey="users">
+          <Nav variant="pills" className="mb-4">
+            <Nav.Item>
+              <Nav.Link eventKey="users">
+                <IconSvg id="user" />
+                <span className="fw-bold">Користувачі</span>
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="departments">
+                <IconSvg id="feather-box" />
+                <span className="fw-bold">Відділи</span>
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="roles">
+                <IconSvg id="feather-box" />
+                <span className="fw-bold">Ролі</span>
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="general">
+                <IconSvg id="feather-box" />
+                <span className="fw-bold">Інщі</span>
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+          <Tab.Content>
+            <Tab.Pane eventKey="users">
+              <Users />
+            </Tab.Pane>
+            <Tab.Pane eventKey="departments">
+              <Departments />
+            </Tab.Pane>
+            <Tab.Pane eventKey="roles">
+              <Roles />
+            </Tab.Pane>
+            <Tab.Pane eventKey="general">
+              <General />
+            </Tab.Pane>
+          </Tab.Content>
+        </Tab.Container>
       </div>
     </>
   );

@@ -4,10 +4,10 @@ import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
 import { Ukrainian as uk } from "flatpickr/dist/l10n/uk.js";
 import Heading from "../../../layouts/components/Heading";
-import Input from "../../../lib/Input";
-import UpdateNum from "../../../lib/modal/UpdateNum";
+import Input from "../../../components/form/Input";
+import UpdateNum from "../../../components/modal/UpdateNum";
 import { useDispatch, useSelector } from "react-redux";
-import { getNomenclature } from "../../../actions/documents";
+import { getNomenclature } from "../../../redux/actions/documents";
 
 const AddDocument = () => {
   const [picker, setPicker] = useState(new Date());

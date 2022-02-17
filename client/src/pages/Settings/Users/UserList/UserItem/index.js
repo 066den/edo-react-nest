@@ -1,6 +1,6 @@
 import { Dropdown } from "react-bootstrap";
 
-import IconSvg from "../../../../../lib/Svg/IconSvg";
+import IconSvg from "../../../../../components/Svg/IconSvg";
 
 import castomAvatar from "./../../../../../assets/ava.png";
 
@@ -16,7 +16,7 @@ const UserItem = ({ user, show, setUserId }) => {
               <img
                 src={
                   (avatar &&
-                    `${process.env.REACT_APP_API_URL}/image/${avatar}`) ||
+                    `${process.env.REACT_APP_API_URL}/avatar/${avatar}`) ||
                   castomAvatar
                 }
                 alt="Avatar"
@@ -24,9 +24,9 @@ const UserItem = ({ user, show, setUserId }) => {
             </div>
           </div>
           <div className="d-flex flex-column">
-            <a href="!#" className="user_name text-truncate text-body">
+            <span className="user_name text-truncate text-body">
               <span className="fw-bolder">{full_name}</span>
-            </a>
+            </span>
             <small className="emp_post text-muted">{email}</small>
           </div>
         </div>
@@ -51,7 +51,7 @@ const UserItem = ({ user, show, setUserId }) => {
         <div className="btn-group actions">
           <Dropdown>
             <Dropdown.Toggle className="hide-arrow" variant="link">
-              <IconSvg id="more" />
+              <IconSvg id="more-vertical" />
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item

@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import UpdateUser from "../../../../lib/modal/UpdateUser";
-
+import UpdateUser from "../../../../components/modal/UpdateUser";
 import "../user.scss";
 
 import UserItem from "./UserItem";
 
-const UserList = () => {
-  const users = useSelector((state) => state.user.users);
+const UserList = ({ usersList, loading }) => {
   const [userId, setUserId] = useState(null);
   const [updateUserShow, setUpdateUserShow] = useState(false);
 
@@ -24,14 +21,15 @@ const UserList = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <UserItem
-              key={user.id}
-              user={user}
-              show={setUpdateUserShow}
-              setUserId={setUserId}
-            />
-          ))}
+          {!loading &&
+            usersList.map((user) => (
+              <UserItem
+                key={user.id}
+                user={user}
+                show={setUpdateUserShow}
+                setUserId={setUserId}
+              />
+            ))}
         </tbody>
       </table>
       <UpdateUser

@@ -1,5 +1,5 @@
-import IconSvg from "../../../lib/Svg/IconSvg";
-import CreateDocument from "../../../lib/modal/CreateDocument";
+import IconSvg from "../../../components/Svg/IconSvg";
+import CreateDocument from "../../../components/modal/CreateDocument";
 import { useState } from "react";
 
 const InDocuments = () => {

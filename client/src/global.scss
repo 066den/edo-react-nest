@@ -60,6 +60,7 @@ a {
   }
   svg {
     vertical-align: bottom;
+    margin-right: 0.2em;
   }
 }
 
@@ -102,6 +103,8 @@ a {
     font-size: 1rem;
     line-height: 1rem;
     color: $text;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
     &.active {
       background-color: $accent;
       border-color: $accent;
@@ -120,6 +123,19 @@ a {
   background-color: $accent !important;
   &:hover:not(.disabled):not(:disabled) {
     box-shadow: 0 8px 25px -8px $accent;
+  }
+}
+
+.btn-outline-primary {
+  color: $accent;
+  border-color: $accent;
+}
+
+.btn-outline-custom {
+  border-color: #d8d6de;
+  padding: 0 1rem;
+  &:hover {
+    background-color: #efefef;
   }
 }
 
@@ -309,6 +325,40 @@ a {
   display: inline-flex;
 }
 
+.file-upload {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  input {
+    display: none;
+  }
+}
+.upload-button {
+  border: 2px dashed #bdc3c7;
+  background-clip: content-box;
+  background-color: #f9f9f9;
+  position: relative;
+  min-height: 60px;
+  min-width: 60px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    width: 24px;
+    height: 24px;
+    color: #bdc3c7;
+  }
+}
+
+.uploaded-avatar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
 .flatpickr-input[readonly],
 .flatpickr-input ~ .form-control[readonly],
 .flatpickr-human-friendly[readonly] {
@@ -361,8 +411,12 @@ span.flatpickr-weekday {
   resize: none;
   &:not([class*="flatpickr-input"])[readonly] {
     background-color: #fff;
-    border: none;
   }
+}
+
+.invalid-feedback {
+  position: absolute;
+  margin-top: 0;
 }
 
 label {
@@ -385,6 +439,28 @@ label {
 .item-icon {
   cursor: pointer;
   padding: 5px;
+  &.small {
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+.primary {
+  color: $accent;
+}
+
+.danger {
+  color: #842029;
+}
+
+.hovered {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: #efefef;
+  }
 }
 
 @media (min-width: 576px) {

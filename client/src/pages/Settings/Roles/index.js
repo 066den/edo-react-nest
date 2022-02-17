@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CreateRole from "../../../lib/modal/CreateRole";
+import CreateRole from "../../../components/modal/CreateRole";
 import RoleList from "./RolesList";
 
 const Roles = () => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import IconSvg from "../../../lib/Svg/IconSvg";
+import IconSvg from "../../../components/Svg/IconSvg";
 
 const General = () => {
   const [fields, setFields] = useState([]);

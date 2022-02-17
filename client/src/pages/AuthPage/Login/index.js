@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../../../actions/user";
-import Input from "../../../lib/Input";
-import Select from "../../../lib/Select";
+import { login } from "../../../redux/actions/user";
+import Input from "../../../components/form/Input";
+import Select from "../../../components/form/Select";
 
 const Login = () => {
   const [full_name, setName] = useState("");

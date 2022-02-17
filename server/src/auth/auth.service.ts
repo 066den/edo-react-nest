@@ -31,7 +31,7 @@ export class AuthService {
     const hashPassword = await bcrypt.hash(userDto.password, 6);
     let fileName = '';
     if(file){
-      fileName = await this.filesService.createImage(file);
+      fileName = file.filename;
     }
     
     const user = await this.userService.createUser({...userDto, avatar: fileName, password: hashPassword})

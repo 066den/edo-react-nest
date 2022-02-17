@@ -1,6 +1,6 @@
 import "./navbar.scss";
 import { NavLink } from "react-router-dom";
-import IconSvg from "../../../lib/Svg/IconSvg";
+import IconSvg from "../../../components/Svg/IconSvg";
 import logo from "../../../logo.png";
 
 const Navbar = () => {
@@ -45,7 +45,13 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="settings/users" className="d-flex align-items-center">
+            <NavLink to="senders" className="d-flex align-items-center">
+              <IconSvg id="users" />
+              <span className="menu-title text-truncate">Контрагенти</span>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="settings" className="d-flex align-items-center">
               <IconSvg id="setting" />
               <span className="menu-title text-truncate">Налаштування</span>
             </NavLink>

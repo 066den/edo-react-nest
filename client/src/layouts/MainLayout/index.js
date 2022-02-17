@@ -1,12 +1,11 @@
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./../components/Navbar";
 import Header from "./../components/Header";
+import Toasts from "../../components/Toast";
 
 const MainLayout = ({ children }) => {
   return (
     <>
-      <ToastContainer hideProgressBar />
+      <Toasts />
       <Header />
       <Navbar />
       <div className="app-content content">

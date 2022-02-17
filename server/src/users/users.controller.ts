@@ -8,6 +8,8 @@ import { Body, Controller, Get, Param, Post, Put, UploadedFile, UseGuards, UseIn
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/roles-auth.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { editFileName, imageFileFilter } from 'src/utils/file-upload.utils';
 
 @ApiTags('Пользователи')
 @Controller('users')
@@ -28,7 +30,14 @@ export class UsersController {
   //@Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Put(':id')
-  @UseInterceptors(FileInterceptor('avatar'))
+  @UseInterceptors(
+    FileInterceptor('avatar',{
+      storage: diskStorage({
+        destination: './dist/uploads/avatar',
+        filename: editFileName,
+      }),
+      fileFilter: imageFileFilter,
+    }))
   updateUser(@Param('id') id: string, @Body() userDto: CreateUserDto, @UploadedFile() file ){
     return this.usersService.updateUser(id, userDto, file)
   }

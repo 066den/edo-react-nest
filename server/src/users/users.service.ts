@@ -25,7 +25,7 @@ export class UsersService {
   async updateUser(id: string, userDto: CreateUserDto, file: any) {
     let fileName = '';
     if(file){
-      fileName = await this.filesService.createImage(file);
+      fileName = file.filename;
     }
     await this.userRepository.update({...userDto, avatar: fileName},{where:{id:id}});
     

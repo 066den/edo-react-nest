@@ -9,6 +9,7 @@ import { UserDoc } from 'src/docs/users-docs.model';
 interface UserCreationAttrs {
   full_name: string;
   password: string;
+  
 }
 
 @Table({tableName: 'users'})
