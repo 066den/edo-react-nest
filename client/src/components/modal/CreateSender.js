@@ -12,23 +12,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAlert } from "../../redux/reducers/appReducer";
 import { useEffect } from "react";
 
+const validationSchema = yup.object({
+  name: yup.string().required("Поле обов'язкове"),
+  email: yup
+    .string()
+    .email("Невірний формат пошти")
+    .required("Пошта обов'язкова"),
+});
+
+const fields = {
+  name: "",
+  email: "",
+  description: "",
+};
+
 const CreateSender = ({ show, onHide, senderId }) => {
   const dispatch = useDispatch();
   const senders = useSelector((state) => state.user.senders);
-
-  const validationSchema = yup.object({
-    name: yup.string().required("Поле обов'язкове"),
-    email: yup
-      .string()
-      .email("Невірний формат пошти")
-      .required("Пошта обов'язкова"),
-  });
-
-  const fields = {
-    name: "",
-    email: "",
-    description: "",
-  };
 
   const formik = useFormik({
     initialValues: fields,
@@ -36,7 +36,7 @@ const CreateSender = ({ show, onHide, senderId }) => {
     onSubmit: submit,
   });
 
-  function submit(values, { resetForm, isSubmitting }) {
+  function submit(values, { resetForm, setSubmitting }) {
     if (senderId) {
       updateSender(values, senderId)
         .then((response) => dispatch(getSenders()))
@@ -48,7 +48,7 @@ const CreateSender = ({ show, onHide, senderId }) => {
         })
         .catch();
     }
-    isSubmitting(false);
+    setSubmitting(false);
     resetForm(fields);
   }
 

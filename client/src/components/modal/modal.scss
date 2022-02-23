@@ -2,6 +2,15 @@
   //background-color: rgba(#22292f, 0.5);
   pointer-events: none;
   display: block !important;
+  .modal-content {
+    overflow: visible;
+  }
+}
+
+.modal-header {
+  .btn-close {
+    margin: -1.35rem -0.5rem -0.5rem auto;
+  }
 }
 
 .modal-backdrop {

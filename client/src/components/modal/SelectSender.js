@@ -1,9 +1,9 @@
-import { Button, Col, Modal, Row } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 
 import "./modal.scss";
-import IconSvg from "../Svg/IconSvg";
+import Senders from "../../pages/Senders";
 
-const SelectSender = ({ show, onHide }) => {
+const SelectSender = ({ show, onHide, hendleSelectSender }) => {
   return (
     <Modal
       size="lg"
@@ -11,25 +11,20 @@ const SelectSender = ({ show, onHide }) => {
       onHide={onHide}
       dialogClassName="modal-dialog-scrollable"
     >
-      <Modal.Header closeButton>
-        <Modal.Title>Номенклатура</Modal.Title>
-      </Modal.Header>
+      <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
-        <Row>
-          <Col></Col>
-        </Row>
+        <Senders modal />
       </Modal.Body>
-      <Modal.Footer className="justify-content-between">
-        <button
-          className="btn btn-icon btn-primary waves-effect waves-float waves-light"
-          type="button"
+      <Modal.Footer className="justify-content-start">
+        <Button
+          variant="primary"
+          onClick={() => {
+            hendleSelectSender();
+            onHide();
+          }}
         >
-          <span className="me-1">
-            <IconSvg id="plus" />
-          </span>
-          <span>Додати</span>
-        </button>
-        <Button variant="primary">Зберегти</Button>
+          Вибрати
+        </Button>
       </Modal.Footer>
     </Modal>
   );

@@ -51,7 +51,6 @@ const CreateUser = ({ show, onHide }) => {
 
   function submit(values, { resetForm, setSubmitting }) {
     const formData = new FormData();
-    console.log(values);
     formData.append("full_name", values.full_name);
     formData.append("email", values.email);
     formData.append("password", values.password);

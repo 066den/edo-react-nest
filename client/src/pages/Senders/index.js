@@ -1,3 +1,4 @@
+import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,15 +7,20 @@ import withReactContent from "sweetalert2-react-content";
 import CreateSender from "../../components/modal/CreateSender";
 import IconSvg from "../../components/Svg/IconSvg";
 import { deleteSender, getSenders } from "../../redux/actions/user";
-import { delSender } from "../../redux/reducers/userReducer";
+import { delSender, selectSender } from "../../redux/reducers/userReducer";
 
-const Senders = () => {
+const Senders = ({ modal }) => {
   const [createSenderShow, setCreateSenderShow] = useState(false);
   const [senderId, setSenderId] = useState(null);
   const dispatch = useDispatch();
   const senders = useSelector((state) => state.user.senders);
-
   const MySwal = withReactContent(Swal);
+
+  const formik = useFormik({
+    initialValues: {
+      checked: "",
+    },
+  });
 
   const handleConfirmDelete = (id, name) => {
     return MySwal.fire({
@@ -39,6 +45,10 @@ const Senders = () => {
   useEffect(() => {
     dispatch(getSenders());
   }, []);
+
+  useEffect(() => {
+    dispatch(selectSender(formik.values.checked));
+  }, [formik.values.checked]);
 
   return (
     <>
@@ -71,7 +81,7 @@ const Senders = () => {
           </div>
         </div>
         <div className="d-flex justify-content-between align-items-center p-3 row">
-          <div className="col-sm-12 col-md-6">
+          <div className={`col-sm-12 ${modal ? "" : "col-md-6"}`}>
             <Form.Control placeholder="Для пошуку введіть назву організації або ім'я або ел. пошту" />
           </div>
         </div>
@@ -79,16 +89,24 @@ const Senders = () => {
           <table className="table dataTable mt-0">
             <thead className="table-light">
               <tr>
+                <th></th>
                 <th>Назва</th>
                 <th>Електронна пошта</th>
-                <th>Додаткові данні</th>
-                <th></th>
+                <th>Інформація</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {senders.map(({ id, name, description, email }) => (
                 <tr key={id}>
+                  <td>
+                    <Form.Check
+                      type="checkbox"
+                      name="checked"
+                      checked={formik.values.checked === id}
+                      onChange={() => formik.setFieldValue("checked", id)}
+                    />
+                  </td>
                   <td>{name}</td>
                   <td>
                     <a href={`mailto:${email}`}>{email}</a>
@@ -104,10 +122,8 @@ const Senders = () => {
                     >
                       <IconSvg id="edit" />
                     </span>
-                  </td>
-                  <td>
                     <span
-                      className="item-icon small danger"
+                      className="item-icon small danger ms-1"
                       onClick={() => handleConfirmDelete(id, name)}
                     >
                       <IconSvg id="trash" />

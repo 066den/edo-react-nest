@@ -1,11 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../../config";
-import {
-  setSenders,
-  setSettings,
-  setUser,
-  setUsers,
-} from "../reducers/userReducer";
+import { setSenders, setSettings, setUser } from "../reducers/userReducer";
 
 export const createUser = async (form) => {
   try {
@@ -20,7 +15,11 @@ export const createUser = async (form) => {
 
 export const updateUser = async (form, id) => {
   try {
-    await axios.put(`${API_URL}/users/${id}`, form);
+    const userData = JSON.parse(localStorage.userData);
+    await axios.put(`${API_URL}/users/${id}`, form, {
+      headers: { Authorization: `Bearer ${userData.token}` },
+    });
+
     const response = await getUsers();
     return response.data;
   } catch (e) {}
@@ -57,14 +56,8 @@ export const auth = () => {
   };
 };
 
-export const getUsers = async () => {
-  try {
-    const userData = JSON.parse(localStorage.userData);
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}/users`, {
-      headers: { Authorization: `Bearer ${userData.token}` },
-    });
-    return response;
-  } catch (e) {}
+export const getUsers = () => {
+  return axios.get(`${process.env.REACT_APP_API_URL}/users`);
 };
 
 export const getSenders = () => {

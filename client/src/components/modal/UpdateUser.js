@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Form, FormControl, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
@@ -31,20 +31,20 @@ const validationSchema = yup.object({
     ),
 });
 
+const fields = {
+  full_name: "",
+  email: "",
+  post: "",
+  departmentId: "",
+  roleId: "",
+  avatar: null,
+};
+
 const UpdateUser = ({ show, onHide, userId }) => {
   const fileRef = useRef();
   const { departments, roles, users } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
-  const fields = {
-    full_name: "",
-    email: "",
-    post: "",
-    departmentId: "",
-    roleId: "",
-    avatar: null,
-  };
-
+  const [currentUser, setCurrentUser] = useState({});
   const formik = useFormik({
     validationSchema: validationSchema,
     initialValues: fields,
@@ -58,9 +58,10 @@ const UpdateUser = ({ show, onHide, userId }) => {
     formData.append("post", values.post);
     formData.append("departmentId", values.departmentId);
     formData.append("roleId", values.roleId);
-    formData.append("avatar", values.avatar);
+    if (values.avatar) {
+      formData.append("avatar", values.avatar);
+    }
     updateUser(formData, userId).then((data) => dispatch(setUsers(data)));
-
     setSubmitting(false);
     //resetForm(fields);
     onHide();
@@ -71,14 +72,15 @@ const UpdateUser = ({ show, onHide, userId }) => {
   };
 
   useEffect(() => {
-    if (userId) {
-      const currentUser = users.find((user) => user.id === userId);
-      formik.setValues(currentUser);
-    }
+    setCurrentUser(users.find((user) => user.id === userId));
+  }, [userId]);
+
+  useEffect(() => {
+    formik.setValues({ ...currentUser, avatar: null });
     return () => {
       formik.resetForm(fields);
     };
-  }, [userId]);
+  }, [currentUser]);
 
   return (
     <Modal
@@ -96,7 +98,7 @@ const UpdateUser = ({ show, onHide, userId }) => {
           <label className="form-label d-block">Аватар</label>
           <div className="file-upload" onClick={() => fileRef.current.click()}>
             <Thumb
-              file={formik.values.avatar}
+              file={(currentUser && currentUser.avatar) || formik.values.avatar}
               className="uploaded-avatar rounded me-4"
             />
             <label className="upload-button rounded">

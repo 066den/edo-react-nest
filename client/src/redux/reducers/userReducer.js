@@ -2,6 +2,7 @@ const SET_USER = "SET_USER";
 const SET_USERS = "SET_USERS";
 const SET_SENDERS = "SET_SENDERS";
 const DEL_SENDER = "DEL_SENDER";
+const SELECT_SENDER = "SELECT_SENDER";
 const LOGOUT = "LOGOUT";
 const SET_SETTINGS = "SET_SETTINGS";
 
@@ -12,6 +13,7 @@ const defaultState = {
   roles: [],
   departments: [],
   senders: [],
+  selectSender: {},
 };
 
 export default function userReducer(state = defaultState, action) {
@@ -56,6 +58,12 @@ export default function userReducer(state = defaultState, action) {
         senders: state.senders.filter((el) => el.id !== action.payload),
       };
 
+    case SELECT_SENDER:
+      return {
+        ...state,
+        selectSender: state.senders.find((el) => el.id === action.payload),
+      };
+
     default:
       return state;
   }
@@ -70,6 +78,8 @@ export const setSenders = (senders) => ({
 });
 
 export const delSender = (id) => ({ type: DEL_SENDER, payload: id });
+
+export const selectSender = (id) => ({ type: SELECT_SENDER, payload: id });
 
 export const setSettings = (settings) => ({
   type: SET_SETTINGS,

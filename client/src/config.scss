@@ -8,7 +8,7 @@ $text-h: #5e5873;
 $accent-line: rgba(0, 0, 0, 0.08);
 $spacing: 0.19em;
 $text2: #191919;
-$light: #f6f6f6;
+$light: #f2f3f7;
 $fontsize: 14px; // Body Font Size;
 $system: "Montserrat", Helvetica, Arial, serif; // System Font Family
 
@@ -22,3 +22,11 @@ $container-max-widths: (
 );
 
 $modal-xl: 1600px;
+$modal-lg: 960px;
+$form-check-input-checked-bg-color: $accent;
+$form-check-input-checked-border-color: $accent;
+$h4-font-size: 1.286rem;
+$form-switch-bg-image: url("data:image/svg+xml,%3csvg width='26px' height='26px' viewBox='0 0 26 27' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cdefs%3e%3ccircle id='path-1' cx='8' cy='8' r='8'%3e%3c/circle%3e%3cfilter x='-40.6%' y='-21.9%' width='168.8%' height='168.8%' filterUnits='objectBoundingBox' id='filter-2'%3e%3cfeOffset dx='-1' dy='2' in='SourceAlpha' result='shadowOffsetOuter1'%3e%3c/feOffset%3e%3cfeGaussianBlur stdDeviation='1.5' in='shadowOffsetOuter1' result='shadowBlurOuter1'%3e%3c/feGaussianBlur%3e%3cfeColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0' type='matrix' in='shadowBlurOuter1'%3e%3c/feColorMatrix%3e%3c/filter%3e%3c/defs%3e%3cg id='Artboard' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3e%3cg id='switches-dot' transform='translate%285.000000, 5.000000%29' fill-rule='nonzero'%3e%3cg id='Oval'%3e%3cuse fill='black' fill-opacity='1' filter='url%28%23filter-2%29' xlink:href='%23path-1'%3e%3c/use%3e%3cuse fill='%23fff' xlink:href='%23path-1'%3e%3c/use%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+$form-switch-checked-bg-image: url("data:image/svg+xml,%3csvg width='26px' height='26px' viewBox='0 0 26 27' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cdefs%3e%3ccircle id='path-1' cx='8' cy='8' r='8'%3e%3c/circle%3e%3cfilter x='-40.6%' y='-21.9%' width='168.8%' height='168.8%' filterUnits='objectBoundingBox' id='filter-2'%3e%3cfeOffset dx='-1' dy='2' in='SourceAlpha' result='shadowOffsetOuter1'%3e%3c/feOffset%3e%3cfeGaussianBlur stdDeviation='1.5' in='shadowOffsetOuter1' result='shadowBlurOuter1'%3e%3c/feGaussianBlur%3e%3cfeColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0' type='matrix' in='shadowBlurOuter1'%3e%3c/feColorMatrix%3e%3c/filter%3e%3c/defs%3e%3cg id='Artboard' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3e%3cg id='switches-dot' transform='translate%285.000000, 5.000000%29' fill-rule='nonzero'%3e%3cg id='Oval'%3e%3cuse fill='black' fill-opacity='1' filter='url%28%23filter-2%29' xlink:href='%23path-1'%3e%3c/use%3e%3cuse fill='%23fff' xlink:href='%23path-1'%3e%3c/use%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+$form-switch-focus-bg-image: url("data:image/svg+xml,%3csvg width='26px' height='26px' viewBox='0 0 26 27' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cdefs%3e%3ccircle id='path-1' cx='8' cy='8' r='8'%3e%3c/circle%3e%3cfilter x='-40.6%' y='-21.9%' width='168.8%' height='168.8%' filterUnits='objectBoundingBox' id='filter-2'%3e%3cfeOffset dx='-1' dy='2' in='SourceAlpha' result='shadowOffsetOuter1'%3e%3c/feOffset%3e%3cfeGaussianBlur stdDeviation='1.5' in='shadowOffsetOuter1' result='shadowBlurOuter1'%3e%3c/feGaussianBlur%3e%3cfeColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0' type='matrix' in='shadowBlurOuter1'%3e%3c/feColorMatrix%3e%3c/filter%3e%3c/defs%3e%3cg id='Artboard' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3e%3cg id='switches-dot' transform='translate%285.000000, 5.000000%29' fill-rule='nonzero'%3e%3cg id='Oval'%3e%3cuse fill='black' fill-opacity='1' filter='url%28%23filter-2%29' xlink:href='%23path-1'%3e%3c/use%3e%3cuse fill='%23fff' xlink:href='%23path-1'%3e%3c/use%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+$table-cell-vertical-align: middle;

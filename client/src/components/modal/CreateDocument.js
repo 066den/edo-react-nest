@@ -1,29 +1,75 @@
-import { useEffect, useState } from "react";
-import { Button, Form, FormControl, InputGroup, Modal } from "react-bootstrap";
+import { useCallback, useEffect, useState } from "react";
+import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getNomenclature } from "../../redux/actions/documents";
 import Flatpickr from "react-flatpickr";
 import { Ukrainian as uk } from "flatpickr/dist/l10n/uk.js";
-import Input from "../form/Input";
+import * as yup from "yup";
 import "./modal.scss";
 import UpdateNum from "./UpdateNum";
 import IconSvg from "../Svg/IconSvg";
-//import { useLocation } from "react-router-dom";
+import SelectSender from "./SelectSender";
+import { useFormik } from "formik";
+import { selectSender } from "../../redux/reducers/userReducer";
+import Resolution from "../Resolution";
+import SelectUser from "./SelectUser";
+
+const validationSchema = yup.object({});
+
+const fields = {
+  number: "",
+  title: "",
+  nomenclature: "",
+  entryDate: "",
+  docDate: "",
+  description: "",
+  sender: "",
+};
 
 const CreateDocument = ({ show, onHide, title }) => {
-  const [entryDate, setEntryDate] = useState(new Date());
-  const [docDate, setDocDate] = useState(new Date());
   const [updateNumShow, setUpdateNumShow] = useState(false);
   const dispatch = useDispatch();
   const { nomenclature } = useSelector((state) => state.doc);
-  //const location = useLocation();
+  const [addSendersShow, setAddSendersShow] = useState(false);
+  const [selectUserShow, setSelectUserShow] = useState(false);
+  const [executors, setExecutors] = useState([]);
+  console.log(executors);
+
+  const formik = useFormik({
+    initialValues: fields,
+    validationSchema: validationSchema,
+    onSubmit: submit,
+  });
+
+  function submit(values, { resetForm, setSubmitting }) {
+    //setSubmitting(false);
+    //resetForm(fields);
+  }
+
+  const sender = useSelector((state) => state.user.selectSender);
+
+  const hendleSelectSender = useCallback(() => {
+    if (sender) {
+      formik.setFieldValue("sender", sender.name);
+    }
+  }, [sender]);
+
+  const clearSenderField = useCallback(() => {
+    dispatch(selectSender());
+    formik.setFieldValue("sender", "");
+  }, []);
 
   useEffect(() => {
     dispatch(getNomenclature());
-  }, [dispatch]);
+  }, []);
 
   return (
-    <Modal show={show} onHide={onHide} size="xl">
+    <Modal
+      show={show}
+      onHide={onHide}
+      size="xl"
+      dialogClassName="modal-dialog-scrollable"
+    >
       <Modal.Header closeButton>
         <Modal.Title>Додати {title}</Modal.Title>
       </Modal.Header>
@@ -48,9 +94,7 @@ const CreateDocument = ({ show, onHide, title }) => {
                   onHide={() => setUpdateNumShow(false)}
                 />
                 <InputGroup className="mb-3">
-                  <FormControl className="mw-33" />
-                  <InputGroup.Text>/</InputGroup.Text>
-                  <Form.Select>
+                  <Form.Select {...formik.getFieldProps("nomenclature")}>
                     <option>Номенклатура</option>
                     {nomenclature.map((i) => (
                       <option key={i.id} value={i.value}>
@@ -58,62 +102,105 @@ const CreateDocument = ({ show, onHide, title }) => {
                       </option>
                     ))}
                   </Form.Select>
+                  <InputGroup.Text>/</InputGroup.Text>
+                  <Form.Control
+                    {...formik.getFieldProps("number")}
+                    className="mw-33"
+                  />
                 </InputGroup>
               </div>
-              <div className="col-2">
+              <div className="col-auto">
                 <label className="form-label">Дата та час надходження</label>
                 <Flatpickr
                   data-enable-time
-                  value={entryDate}
+                  value={formik.values.entryDate}
+                  onChange={(date) => formik.setFieldValue("entryDate", date)}
                   options={{
                     locale: {
                       ...uk,
                       firstDayOfWeek: 1,
                     },
-                    dateFormat: "d-m-Y h:m",
+                    dateFormat: "d.m.Y h:m",
                     time_24hr: true,
                   }}
                   className="form-control"
-                  onChange={(date) => setEntryDate(date)}
                 />
               </div>
-              <div className="col-2">
-                <label className="form-label">Номер та дата документу</label>
+              <div className="col">
+                <label className="form-label">Дата та номер документу</label>
                 <InputGroup className="mb-3">
-                  <FormControl />
                   <Flatpickr
-                    value={docDate}
+                    value={formik.values.docDate}
+                    onChange={(date) => formik.setFieldValue("docDate", date)}
                     options={{
                       locale: {
                         ...uk,
                         firstDayOfWeek: 1,
                       },
-                      dateFormat: "d-m-Y",
+                      dateFormat: "d.m.Y",
                       time_24hr: true,
                     }}
                     className="form-control"
-                    onChange={(date) => setDocDate(date)}
+                  />
+                  <InputGroup.Text>№</InputGroup.Text>
+                  <Form.Control
+                    name="title"
+                    {...formik.getFieldProps("title")}
                   />
                 </InputGroup>
               </div>
               <div className="col-5">
-                <Input label="Короткий зміст" />
+                <label className="form-label">Короткий зміст</label>
+                <Form.Control />
               </div>
-              <div className="col-4">
-                <label>Від кого</label>
-                <InputGroup className="mb-3">
-                  <FormControl
+              <div className="col-6">
+                <label className="form-label">Від кого</label>
+                <InputGroup className="mb-4">
+                  <Form.Control
                     readOnly
-                    placeholder="Для вибору натисніть ..."
+                    placeholder="Для вибору натисніть &middot;&middot;&middot;"
+                    {...formik.getFieldProps("sender")}
                   />
-                  <Button variant="outline-custom">
+                  <Button
+                    variant="outline-custom"
+                    onClick={() => setAddSendersShow(true)}
+                  >
                     <IconSvg id="more-horizontal" w={20} h={20} />
                   </Button>
+                  {formik.values.sender && (
+                    <Button
+                      variant="outline-custom"
+                      onClick={() => clearSenderField()}
+                    >
+                      <IconSvg id="time" w={20} h={20} />
+                    </Button>
+                  )}
                 </InputGroup>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-6">
+                <button
+                  className="btn btn-outline-primary w-100 mb-3"
+                  onClick={() => setSelectUserShow(true)}
+                >
+                  Додати виконавця
+                </button>
+                <SelectUser
+                  show={selectUserShow}
+                  onHide={() => setSelectUserShow(false)}
+                  setExecutors={setExecutors}
+                />
+                <Resolution executors={executors} setExecutors={setExecutors} />
               </div>
             </div>
           </div>
         </div>
+        <SelectSender
+          show={addSendersShow}
+          onHide={() => setAddSendersShow(false)}
+          hendleSelectSender={hendleSelectSender}
+        />
       </Modal.Body>
       <Modal.Footer className="justify-content-start">
         <Button variant="primary">Зберегти</Button>

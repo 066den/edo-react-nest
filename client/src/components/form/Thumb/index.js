@@ -22,7 +22,7 @@ const Thumb = ({ file, className }) => {
 
   return (
     <img
-      src={`${process.env.REACT_APP_API_URL}/image/${file}`}
+      src={`${process.env.REACT_APP_API_URL}/avatar/${file}`}
       alt="avatar"
       className={className}
     />
